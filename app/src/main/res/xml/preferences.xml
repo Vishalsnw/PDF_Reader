@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: preferences.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:56:08 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Reading Preferences -->
+    <PreferenceCategory
+        android:title="@string/pref_category_reading"
+        android:key="pref_category_reading"
+        app:iconSpaceReserved="false">
+
+        <!-- Reading Theme -->
+        <ListPreference
+            android:key="reading_theme"
+            android:title="@string/pref_reading_theme"
+            android:summary="%s"
+            android:entries="@array/reading_theme_entries"
+            android:entryValues="@array/reading_theme_values"
+            android:defaultValue="light"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Font Size -->
+        <SeekBarPreference
+            android:key="font_size"
+            android:title="@string/pref_font_size"
+            android:summary="@string/pref_font_size_summary"
+            android:max="100"
+            android:defaultValue="50"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Line Spacing -->
+        <SeekBarPreference
+            android:key="line_spacing"
+            android:title="@string/pref_line_spacing"
+            android:summary="@string/pref_line_spacing_summary"
+            android:max="50"
+            android:defaultValue="20"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Keep Screen On -->
+        <SwitchPreferenceCompat
+            android:key="keep_screen_on"
+            android:title="@string/pref_keep_screen_on"
+            android:summary="@string/pref_keep_screen_on_summary"
+            android:defaultValue="false"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+    <!-- Display Preferences -->
+    <PreferenceCategory
+        android:title="@string/pref_category_display"
+        android:key="pref_category_display"
+        app:iconSpaceReserved="false">
+
+        <!-- View Mode -->
+        <ListPreference
+            android:key="view_mode"
+            android:title="@string/pref_view_mode"
+            android:summary="%s"
+            android:entries="@array/view_mode_entries"
+            android:entryValues="@array/view_mode_values"
+            android:defaultValue="grid"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Dark Mode -->
+        <ListPreference
+            android:key="dark_mode"
+            android:title="@string/pref_dark_mode"
+            android:summary="%s"
+            android:entries="@array/dark_mode_entries"
+            android:entryValues="@array/dark_mode_values"
+            android:defaultValue="system"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+    <!-- Data & Storage -->
+    <PreferenceCategory
+        android:title="@string/pref_category_data"
+        android:key="pref_category_data"
+        app:iconSpaceReserved="false">
+
+        <!-- Image Quality -->
+        <ListPreference
+            android:key="image_quality"
+            android:title="@string/pref_image_quality"
+            android:summary="%s"
+            android:entries="@array/image_quality_entries"
+            android:entryValues="@array/image_quality_values"
+            android:defaultValue="auto"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Clear Cache -->
+        <Preference
+            android:key="clear_cache"
+            android:title="@string/pref_clear_cache"
+            android:summary="@string/pref_clear_cache_summary"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Download Location -->
+        <Preference
+            android:key="download_location"
+            android:title="@string/pref_download_location"
+            android:summary="@string/pref_download_location_summary"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+    <!-- Notifications -->
+    <PreferenceCategory
+        android:title="@string/pref_category_notifications"
+        android:key="pref_category_notifications"
+        app:iconSpaceReserved="false">
+
+        <!-- Enable Notifications -->
+        <SwitchPreferenceCompat
+            android:key="enable_notifications"
+            android:title="@string/pref_enable_notifications"
+            android:summary="@string/pref_enable_notifications_summary"
+            android:defaultValue="true"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Update Notifications -->
+        <SwitchPreferenceCompat
+            android:key="update_notifications"
+            android:title="@string/pref_update_notifications"
+            android:summary="@string/pref_update_notifications_summary"
+            android:defaultValue="true"
+            android:dependency="enable_notifications"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+    <!-- About -->
+    <PreferenceCategory
+        android:title="@string/pref_category_about"
+        android:key="pref_category_about"
+        app:iconSpaceReserved="false">
+
+        <!-- Version -->
+        <Preference
+            android:key="version"
+            android:title="@string/pref_version"
+            android:summary="@string/app_version"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Privacy Policy -->
+        <Preference
+            android:key="privacy_policy"
+            android:title="@string/pref_privacy_policy"
+            app:iconSpaceReserved="false"/>
+
+        <!-- Terms of Service -->
+        <Preference
+            android:key="terms_of_service"
+            android:title="@string/pref_terms_of_service"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
