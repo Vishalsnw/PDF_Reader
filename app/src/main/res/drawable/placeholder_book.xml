@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: placeholder_book.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:54:02 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="180dp"
+    android:viewportWidth="120"
+    android:viewportHeight="180">
+
+    <!-- Book Cover Background -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M0,0h120v180h-120z"
+        android:name="cover_background"/>
+
+    <!-- Book Spine Shadow -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M0,0h12v180h-12z"
+        android:name="spine_shadow"/>
+
+    <!-- Book Title Placeholder -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M24,60h72v8h-72z"
+        android:name="title_line_1"/>
+
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M24,76h48v8h-48z"
+        android:name="title_line_2"/>
+
+    <!-- Book Author Placeholder -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M24,120h60v6h-60z"
+        android:name="author_line"/>
+
+    <!-- Book Cover Icon -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M48,24h24v24h-24z"
+        android:name="cover_icon"/>
+
+    <!-- Loading Animation Overlay -->
+    <path
+        android:fillColor="#F5F5F5"
+        android:pathData="M0,0h120v180h-120z"
+        android:name="loading_overlay"
+        android:alpha="0"/>
+
+    <!-- Shimmer Effect -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M-60,0l240,0l-80,180l-240,0z"
+        android:name="shimmer"
+        android:alpha="0.1"/>
+
+    <!-- Error State -->
+    <group
+        android:name="error_group"
+        android:alpha="0">
+        
+        <path
+            android:fillColor="#E57373"
+            android:pathData="M48,75c0,13.25 10.75,24 24,24s24,-10.75 24,-24s-10.75,-24 -24,-24S48,61.75 48,75zM66,84h12v-4H66V84zM66,76h12v-4H66V76zM66,68h12v-4H66V68z"
+            android:name="error_icon"/>
+    </group>
+
+    <!-- Selected State -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M0,0h120v180h-120z"
+        android:name="selected"
+        android:alpha="0"/>
+
+</vector>
