@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: dimens.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:30:38 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<resources>
+    <!-- Spacing System -->
+    <dimen name="spacing_micro">2dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">48dp</dimen>
+    <dimen name="spacing_huge">64dp</dimen>
+
+    <!-- Typography -->
+    <dimen name="text_micro">10sp</dimen>
+    <dimen name="text_tiny">12sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">20sp</dimen>
+    <dimen name="text_xxlarge">24sp</dimen>
+    <dimen name="text_huge">34sp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_none">0dp</dimen>
+    <dimen name="elevation_small">1dp</dimen>
+    <dimen name="elevation_medium">2dp</dimen>
+    <dimen name="elevation_large">4dp</dimen>
+    <dimen name="elevation_xlarge">6dp</dimen>
+    <dimen name="elevation_xxlarge">8dp</dimen>
+
+    <!-- Corner Radius -->
+    <dimen name="corner_none">0dp</dimen>
+    <dimen name="corner_tiny">2dp</dimen>
+    <dimen name="corner_small">4dp</dimen>
+    <dimen name="corner_medium">8dp</dimen>
+    <dimen name="corner_large">12dp</dimen>
+    <dimen name="corner_xlarge">16dp</dimen>
+    <dimen name="corner_xxlarge">24dp</dimen>
+
+    <!-- Border Width -->
+    <dimen name="border_thin">0.5dp</dimen>
+    <dimen name="border_medium">1dp</dimen>
+    <dimen name="border_thick">2dp</dimen>
+
+    <!-- Component Sizes -->
+    
+    <!-- Buttons -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_min_width">64dp</dimen>
+    <dimen name="button_padding_horizontal">16dp</dimen>
+    <dimen name="button_padding_vertical">8dp</dimen>
+    <dimen name="button_icon_size">24dp</dimen>
+    <dimen name="button_icon_padding">8dp</dimen>
+
+    <!-- Icons -->
+    <dimen name="icon_size_tiny">16dp</dimen>
+    <dimen name="icon_size_small">20dp</dimen>
+    <dimen name="icon_size_medium">24dp</dimen>
+    <dimen name="icon_size_large">32dp</dimen>
+    <dimen name="icon_size_xlarge">48dp</dimen>
+    <dimen name="icon_padding">8dp</dimen>
+
+    <!-- Cards -->
+    <dimen name="card_elevation">1dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_content_padding">16dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_image_height">200dp</dimen>
+
+    <!-- List Items -->
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
+    <dimen name="list_item_icon_size">40dp</dimen>
+    <dimen name="list_item_text_margin">32dp</dimen>
+
+    <!-- Grid Items -->
+    <dimen name="grid_item_spacing">4dp</dimen>
+    <dimen name="grid_item_padding">8dp</dimen>
+    <dimen name="grid_item_icon_size">48dp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="toolbar_icon_padding">12dp</dimen>
+    <dimen name="toolbar_title_margin">16dp</dimen>
+
+    <!-- Bottom Navigation -->
+    <dimen name="bottom_nav_height">56dp</dimen>
+    <dimen name="bottom_nav_icon_size">24dp</dimen>
+    <dimen name="bottom_nav_text_size">12sp</dimen>
+
+    <!-- Bottom Sheet -->
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+    <dimen name="bottom_sheet_elevation">8dp</dimen>
+    <dimen name="bottom_sheet_peek_height">56dp</dimen>
+
+    <!-- Dialogs -->
+    <dimen name="dialog_padding">24dp</dimen>
+    <dimen name="dialog_corner_radius">28dp</dimen>
+    <dimen name="dialog_elevation">24dp</dimen>
+    <dimen name="dialog_min_width">280dp</dimen>
+    <dimen name="dialog_max_width">560dp</dimen>
+
+    <!-- Progress -->
+    <dimen name="progress_size_small">16dp</dimen>
+    <dimen name="progress_size_medium">36dp</dimen>
+    <dimen name="progress_size_large">48dp</dimen>
+    <dimen name="progress_stroke_width">2dp</dimen>
+
+    <!-- Custom Components -->
+    
+    <!-- Book Cover -->
+    <dimen name="book_cover_width">120dp</dimen>
+    <dimen name="book_cover_height">180dp</dimen>
+    <dimen name="book_cover_radius">8dp</dimen>
+
+    <!-- Chapter List -->
+    <dimen name="chapter_item_height">64dp</dimen>
+    <dimen name="chapter_number_width">48dp</dimen>
+    <dimen name="chapter_margin">8dp</dimen>
+
+    <!-- Category Chips -->
+    <dimen name="chip_height">32dp</dimen>
+    <dimen name="chip_spacing">4dp</dimen>
+    <dimen name="chip_icon_size">18dp</dimen>
+    <dimen name="chip_text_padding">8dp</dimen>
+
+    <!-- Reader -->
+    <dimen name="reader_page_margin">16dp</dimen>
+    <dimen name="reader_line_spacing">4dp</dimen>
+    <dimen name="reader_paragraph_spacing">8dp</dimen>
+    <dimen name="reader_min_text_size">12sp</dimen>
+    <dimen name="reader_max_text_size">32sp</dimen>
+</resources>
