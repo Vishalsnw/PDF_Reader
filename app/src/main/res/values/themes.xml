@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: themes.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:35:51 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base Theme (Light) -->
+    <style name="Base.Theme.ReaderApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_container</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_container</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        
+        <!-- Tertiary brand color -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorTertiaryVariant">@color/tertiary_container</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        
+        <!-- Status bar and Navigation bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+
+        <!-- Window background -->
+        <item name="android:windowBackground">@color/background</item>
+        
+        <!-- Typography -->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.ReaderApp.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.ReaderApp.Headline2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.ReaderApp.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.ReaderApp.Body2</item>
+        
+        <!-- Shape -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.ReaderApp.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.ReaderApp.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.ReaderApp.LargeComponent</item>
+    </style>
+
+    <!-- Dark Theme -->
+    <style name="Base.Theme.ReaderApp.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- System bars -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        
+        <!-- Colors for dark theme -->
+        <item name="colorPrimary">@color/inverse_primary</item>
+        <item name="colorOnPrimary">@color/inverse_on_surface</item>
+        <item name="android:windowBackground">@color/inverse_surface</item>
+    </style>
+
+    <!-- Reading Themes -->
+    <style name="Theme.ReaderApp.Reading.Light" parent="Base.Theme.ReaderApp">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@color/reading_background_light</item>
+        <item name="android:textColor">@color/reading_text_light</item>
+        <item name="colorPrimary">@color/reading_text_light</item>
+        <item name="colorControlNormal">@color/reading_text_light</item>
+    </style>
+
+    <style name="Theme.ReaderApp.Reading.Dark" parent="Base.Theme.ReaderApp.Dark">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@color/reading_background_dark</item>
+        <item name="android:textColor">@color/reading_text_dark</item>
+        <item name="colorPrimary">@color/reading_text_dark</item>
+        <item name="colorControlNormal">@color/reading_text_dark</item>
+    </style>
+
+    <style name="Theme.ReaderApp.Reading.Sepia" parent="Base.Theme.ReaderApp">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:background">@color/reading_background_sepia</item>
+        <item name="android:textColor">@color/reading_text_sepia</item>
+        <item name="colorPrimary">@color/reading_text_sepia</item>
+        <item name="colorControlNormal">@color/reading_text_sepia</item>
+    </style>
+
+    <!-- Dialog Themes -->
+    <style name="Theme.ReaderApp.Dialog" parent="ThemeOverlay.Material3.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.ReaderApp.Dialog</item>
+    </style>
+
+    <style name="Theme.ReaderApp.Dialog.FullScreen" parent="ThemeOverlay.Material3.Dialog.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/Animation.ReaderApp.Dialog.FullScreen</item>
+    </style>
+
+    <!-- Bottom Sheet Dialog Theme -->
+    <style name="Theme.ReaderApp.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.ReaderApp.BottomSheet</item>
+    </style>
+
+    <!-- Animation Styles -->
+    <style name="Animation.ReaderApp.Dialog" parent="android:Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
+    <style name="Animation.ReaderApp.Dialog.FullScreen">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <!-- Widget Overlay Themes -->
+    <style name="ThemeOverlay.ReaderApp.Toolbar" parent="ThemeOverlay.Material3.Toolbar.Surface">
+        <item name="colorControlNormal">?attr/colorOnSurface</item>
+        <item name="actionMenuTextColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="ThemeOverlay.ReaderApp.BottomNavigation" parent="ThemeOverlay.Material3.NavigationView">
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimary</item>
+    </style>
+</resources>
