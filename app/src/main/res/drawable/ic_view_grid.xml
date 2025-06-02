@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: ic_view_grid.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:50:22 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+
+    <!-- Grid Items - Top Row -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v8h8V3H3zM9,9H5V5h4V9z"
+        android:name="top_left"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M13,3v8h8V3H13zM19,9h-4V5h4V9z"
+        android:name="top_right"/>
+
+    <!-- Grid Items - Bottom Row -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,13v8h8v-8H3zM9,19H5v-4h4V19z"
+        android:name="bottom_left"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M13,13v8h8v-8H13zM19,19h-4v-4h4V19z"
+        android:name="bottom_right"/>
+
+    <!-- Selected State Overlay -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14V19z"
+        android:name="selected"
+        android:alpha="0"/>
+
+    <!-- Animation States -->
+    <group
+        android:name="grid_group"
+        android:pivotX="12"
+        android:pivotY="12">
+        
+        <!-- Grid Animation Outlines -->
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="M3,3v8h8V3H3zM13,3v8h8V3H13zM3,13v8h8v-8H3zM13,13v8h8v-8H13z"
+            android:name="grid_animation"
+            android:alpha="0"/>
+    </group>
+
+    <!-- Focus Indicator -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14V19z"
+        android:name="focus"
+        android:strokeWidth="2"
+        android:strokeColor="@android:color/white"
+        android:alpha="0"/>
+
+</vector>
