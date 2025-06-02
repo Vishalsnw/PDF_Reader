@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: dialog_sort_options.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:13:39 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_large">
+
+        <!-- Sort By -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sort_by"
+            android:textAppearance="?attr/textAppearanceSubtitle1"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupSortBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/author"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioDateAdded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/date_added"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioLastOpened"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/last_opened"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioReadProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reading_progress"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioFileSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/file_size"/>
+
+        </RadioGroup>
+
+        <!-- Sort Order -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/sort_order"
+            android:textAppearance="?attr/textAppearanceSubtitle1"/>
+
+        <RadioGroup
+            android:id="@+id/radioGroupSortOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioAscending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ascending"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/radioDescending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/descending"/>
+
+        </RadioGroup>
+
+        <!-- Additional Options -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/additional_options"
+            android:textAppearance="?attr/textAppearanceSubtitle1"/>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchFoldersFirst"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:text="@string/show_folders_first"/>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchGroupSeries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/group_by_series"/>
+
+        <!-- Display Options -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:text="@string/display_options"
+            android:textAppearance="?attr/textAppearanceSubtitle1"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/grid_view"
+                android:checkable="true"
+                app:chipIcon="@drawable/ic_grid"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/list_view"
+                android:checkable="true"
+                app:chipIcon="@drawable/ic_list"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCompact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/compact_view"
+                android:checkable="true"
+                app:chipIcon="@drawable/ic_compact"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:gravity="end">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset"
+                style="@style/Widget.Material3.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonApply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/apply"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
