@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: ic_chapter.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:39:41 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+
+    <!-- Background Rectangle -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14V19z"
+        android:name="outline"/>
+
+    <!-- Chapter Lines -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M15,7H7v2h8V7zM17,11H7v2h10V11zM15,15H7v2h8V15z"
+        android:name="content"/>
+
+    <!-- Chapter Number Indicator -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M17,7m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0"
+        android:name="number"/>
+
+    <!-- Selected State (when needed) -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v18h18V3H3z"
+        android:name="selected"
+        android:alpha="0"/>
+
+</vector>
