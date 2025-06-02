@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: item_chapter.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:19:25 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:layout_marginVertical="@dimen/spacing_small"
+    app:cardElevation="@dimen/elevation_small"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_medium">
+
+        <!-- Chapter Number -->
+        <TextView
+            android:id="@+id/textChapterNumber"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:background="@drawable/bg_chapter_number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1"/>
+
+        <!-- Chapter Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:layout_constraintStart_toEndOf="@id/textChapterNumber"
+            app:layout_constraintEnd_toStartOf="@id/containerStatus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/textTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                tools:text="Chapter Title That Might Be Long"/>
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/textSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAppearance="?attr/textAppearanceBody2"
+                tools:text="Optional Subtitle"/>
+
+            <!-- Progress -->
+            <LinearLayout
+                android:id="@+id/containerProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/spacing_medium">
+
+                <TextView
+                    android:id="@+id/textProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    tools:text="45% completed • Last read 2 days ago"/>
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    tools:progress="45"/>
+
+            </LinearLayout>
+
+            <!-- Info Chips -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPageCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    tools:text="25 pages"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    tools:text="~15 min"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+        <!-- Status Container -->
+        <LinearLayout
+            android:id="@+id/containerStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Status Icon -->
+            <ImageView
+                android:id="@+id/imageStatus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="@string/chapter_status"
+                app:tint="?attr/colorPrimary"
+                tools:src="@drawable/ic_completed"/>
+
+            <!-- Bookmark -->
+            <ImageButton
+                android:id="@+id/buttonBookmark"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/bookmark_chapter"
+                app:srcCompat="@drawable/ic_bookmark"/>
+
+            <!-- Download Status -->
+            <ImageView
+                android:id="@+id/imageDownloaded"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:contentDescription="@string/downloaded"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:srcCompat="@drawable/ic_downloaded"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
