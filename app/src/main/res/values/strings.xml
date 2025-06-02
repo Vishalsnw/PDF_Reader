@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: strings.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:32:20 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<resources>
+    <!-- App Information -->
+    <string name="app_name">Reader App</string>
+    <string name="app_description">Your Digital Reading Companion</string>
+    <string name="version">Version %1$s</string>
+
+    <!-- Common Actions -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="share">Share</string>
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="apply">Apply</string>
+    <string name="reset">Reset</string>
+    <string name="view_all">View All</string>
+    <string name="more">More</string>
+    <string name="retry">Retry</string>
+
+    <!-- Navigation -->
+    <string name="nav_library">Library</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_reading">Reading</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Library -->
+    <string name="library_title">My Library</string>
+    <string name="recently_added">Recently Added</string>
+    <string name="continue_reading">Continue Reading</string>
+    <string name="favorites">Favorites</string>
+    <string name="collections">Collections</string>
+    <string name="categories">Categories</string>
+
+    <!-- Book Details -->
+    <string name="book_details">Book Details</string>
+    <string name="author">Author</string>
+    <string name="publisher">Publisher</string>
+    <string name="published_date">Published Date</string>
+    <string name="language">Language</string>
+    <string name="pages">Pages</string>
+    <string name="file_size">File Size</string>
+    <string name="file_format">Format</string>
+    <string name="series">Series</string>
+    <string name="series_format">%1$s, Book %2$d</string>
+    <string name="rating">Rating</string>
+    <string name="description">Description</string>
+
+    <!-- Reading -->
+    <string name="start_reading">Start Reading</string>
+    <string name="continue_reading_from">Continue from Chapter %1$d</string>
+    <string name="chapter_progress">%1$d of %2$d chapters</string>
+    <string name="reading_progress">%1$d%% completed</string>
+    <string name="time_left">~%1$d min left</string>
+    <string name="last_read">Last read %1$s</string>
+
+    <!-- Reader Settings -->
+    <string name="reader_settings">Reader Settings</string>
+    <string name="font_size">Font Size</string>
+    <string name="line_spacing">Line Spacing</string>
+    <string name="margins">Margins</string>
+    <string name="theme">Theme</string>
+    <string name="orientation">Orientation</string>
+    <string name="reading_mode">Reading Mode</string>
+
+    <!-- Reading Modes -->
+    <string name="scroll_mode">Scroll</string>
+    <string name="page_mode">Page</string>
+    <string name="continuous_mode">Continuous</string>
+
+    <!-- Themes -->
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_sepia">Sepia</string>
+    <string name="theme_auto">System Default</string>
+
+    <!-- Sort Options -->
+    <string name="sort_by">Sort By</string>
+    <string name="sort_title">Title</string>
+    <string name="sort_author">Author</string>
+    <string name="sort_date_added">Date Added</string>
+    <string name="sort_last_opened">Last Opened</string>
+    <string name="sort_progress">Reading Progress</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+
+    <!-- Filter Options -->
+    <string name="filter_by">Filter By</string>
+    <string name="filter_all">All</string>
+    <string name="filter_unread">Unread</string>
+    <string name="filter_in_progress">In Progress</string>
+    <string name="filter_completed">Completed</string>
+    <string name="filter_downloaded">Downloaded</string>
+
+    <!-- Status Messages -->
+    <string name="loading">Loading…</string>
+    <string name="no_items">No items found</string>
+    <string name="no_results">No results found</string>
+    <string name="error_generic">Something went wrong</string>
+    <string name="error_no_connection">No internet connection</string>
+    <string name="success_saved">Changes saved</string>
+    <string name="success_deleted">Item deleted</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_delete_title">Delete Item</string>
+    <string name="dialog_delete_message">Are you sure you want to delete this item? This action cannot be undone.</string>
+    <string name="dialog_exit_reader">Exit Reader</string>
+    <string name="dialog_exit_message">Do you want to save your reading progress?</string>
+
+    <!-- Accessibility -->
+    <string name="a11y_book_cover">Book cover for %1$s</string>
+    <string name="a11y_reading_progress">%1$d percent complete</string>
+    <string name="a11y_chapter_number">Chapter %1$d</string>
+    <string name="a11y_more_options">More options</string>
+    <string name="a11y_expand_collapse">Expand or collapse</string>
+
+    <!-- Error Messages -->
+    <string name="error_file_not_found">File not found</string>
+    <string name="error_file_load">Unable to load file</string>
+    <string name="error_import">Unable to import file</string>
+    <string name="error_storage">Storage access denied</string>
+    <string name="error_download">Download failed</string>
+
+    <!-- Settings -->
+    <string name="settings_display">Display</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_storage">Storage</string>
+    <string name="settings_backup">Backup</string>
+    <string name="settings_about">About</string>
+    <string name="settings_help">Help</string>
+</resources>
