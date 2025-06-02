@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: styles.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:33:59 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<resources>
+    <!-- Base Application Theme -->
+    <style name="Theme.ReaderApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Color Attributes -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorOnBackground">@color/on_background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+        <item name="colorErrorContainer">@color/error_container</item>
+        <item name="colorOnErrorContainer">@color/on_error_container</item>
+        
+        <!-- System Bars -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Window Configurations -->
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <!-- Reader Themes -->
+    <style name="Theme.ReaderApp.Reader.Light" parent="Theme.ReaderApp">
+        <item name="android:background">@color/reading_background_light</item>
+        <item name="android:textColor">@color/reading_text_light</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Theme.ReaderApp.Reader.Dark" parent="Theme.ReaderApp">
+        <item name="android:background">@color/reading_background_dark</item>
+        <item name="android:textColor">@color/reading_text_dark</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Theme.ReaderApp.Reader.Sepia" parent="Theme.ReaderApp">
+        <item name="android:background">@color/reading_background_sepia</item>
+        <item name="android:textColor">@color/reading_text_sepia</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <!-- Text Appearances -->
+    <style name="TextAppearance.ReaderApp.Headline1" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_huge</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="TextAppearance.ReaderApp.Headline2" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">@dimen/text_xxlarge</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="TextAppearance.ReaderApp.Body1" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+
+    <style name="TextAppearance.ReaderApp.Body2" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+    </style>
+
+    <!-- Button Styles -->
+    <style name="Widget.ReaderApp.Button" parent="Widget.Material3.Button">
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="android:paddingStart">@dimen/button_padding_horizontal</item>
+        <item name="android:paddingEnd">@dimen/button_padding_horizontal</item>
+        <item name="android:textAppearance">?attr/textAppearanceButton</item>
+    </style>
+
+    <style name="Widget.ReaderApp.Button.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeWidth">@dimen/border_medium</item>
+    </style>
+
+    <!-- Card Styles -->
+    <style name="Widget.ReaderApp.Card" parent="Widget.Material3.CardView">
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="contentPadding">@dimen/card_content_padding</item>
+        <item name="android:layout_margin">@dimen/card_margin</item>
+    </style>
+
+    <!-- Progress Indicators -->
+    <style name="Widget.ReaderApp.ProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="indicatorSize">@dimen/progress_size_medium</item>
+        <item name="trackThickness">@dimen/progress_stroke_width</item>
+        <item name="trackColor">?attr/colorSurfaceVariant</item>
+    </style>
+
+    <!-- Chip Styles -->
+    <style name="Widget.ReaderApp.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textAppearance">?attr/textAppearanceCaption</item>
+        <item name="chipMinHeight">@dimen/chip_height</item>
+        <item name="chipIconSize">@dimen/chip_icon_size</item>
+    </style>
+
+    <!-- Bottom Sheet Dialog -->
+    <style name="ThemeOverlay.ReaderApp.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/Widget.ReaderApp.BottomSheet</item>
+    </style>
+
+    <style name="Widget.ReaderApp.BottomSheet" parent="Widget.Material3.BottomSheet">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.ReaderApp.LargeComponent</item>
+        <item name="behavior_peekHeight">@dimen/bottom_sheet_peek_height</item>
+    </style>
+
+    <!-- Shape Appearances -->
+    <style name="ShapeAppearance.ReaderApp.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">@dimen/corner_small</item>
+    </style>
+
+    <style name="ShapeAppearance.ReaderApp.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/corner_medium</item>
+    </style>
+
+    <style name="ShapeAppearance.ReaderApp.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">@dimen/corner_large</item>
+    </style>
+</resources>
