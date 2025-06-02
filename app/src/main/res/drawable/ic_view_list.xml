@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: ic_view_list.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:51:56 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+
+    <!-- List Items -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,4h18v2H3V4z"
+        android:name="item_1"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,11h18v2H3V11z"
+        android:name="item_2"/>
+
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,18h18v2H3V18z"
+        android:name="item_3"/>
+
+    <!-- Selected State -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14V19z"
+        android:name="selected"
+        android:alpha="0"/>
+
+    <!-- List Animation Overlay -->
+    <group
+        android:name="list_group"
+        android:pivotX="12"
+        android:pivotY="12">
+        
+        <!-- List Animation Lines -->
+        <path
+            android:fillColor="@android:color/white"
+            android:pathData="M3,4h18v2H3V4zM3,11h18v2H3V11zM3,18h18v2H3V18z"
+            android:name="list_animation"
+            android:alpha="0"/>
+    </group>
+
+    <!-- Focus Indicator -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,3v18h18V3H3zM19,19H5V5h14V19z"
+        android:name="focus"
+        android:strokeWidth="2"
+        android:strokeColor="@android:color/white"
+        android:alpha="0"/>
+
+    <!-- Hover Effect -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,4h18v2H3V4z"
+        android:name="hover"
+        android:alpha="0"/>
+
+</vector>
