@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: ic_reading.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:48:59 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+
+    <!-- Book Base -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M21,4L3,4c-1.1,0 -2,0.9 -2,2v13c0,1.1 0.9,2 2,2h18c1.1,0 2,-0.9 2,-2L23,6c0,-1.1 -0.9,-2 -2,-2zM21,19L3,19L3,6h18v13z"
+        android:name="book_base"/>
+
+    <!-- Book Pages -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M18,8H6v2h12V8zM18,12H6v2h12V12zM6,16h8v2H6V16z"
+        android:name="pages"/>
+
+    <!-- Reading Progress Indicator -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,19h18V6H3V19zM21,4c1.1,0 2,0.9 2,2v13c0,1.1 -0.9,2 -2,2H3c-1.1,0 -2,-0.9 -2,-2V6c0,-1.1 0.9,-2 2,-2H21z"
+        android:name="progress"
+        android:trimPathStart="0"
+        android:trimPathEnd="0.4"/>
+
+    <!-- Reading Bookmark -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M19,6v13H5V6H19z"
+        android:strokeWidth="1"
+        android:strokeColor="@android:color/white"
+        android:name="bookmark"
+        android:alpha="0"/>
+
+    <!-- Currently Reading Indicator -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M16,2v2H8V2H16z"
+        android:name="current_indicator"/>
+
+    <!-- Reading Animation Overlay -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M3,6v13h18V6H3zM21,4c1.1,0 2,0.9 2,2v13c0,1.1 -0.9,2 -2,2H3c-1.1,0 -2,-0.9 -2,-2V6c0,-1.1 0.9,-2 2,-2H21z"
+        android:name="reading_animation"
+        android:alpha="0"/>
+
+    <!-- Selected State -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M21,4H3C1.9,4 1,4.9 1,6v13c0,1.1 0.9,2 2,2h18c1.1,0 2,-0.9 2,-2V6C23,4.9 22.1,4 21,4z"
+        android:name="selected"
+        android:alpha="0"/>
+
+</vector>
