@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: item_category_chip.xml
+  Created: 2025-06-02
+  Author: Vishalsnw
+  Last Modified: 2025-06-02 15:22:53 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<com.google.android.material.chip.Chip
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    style="@style/Widget.Material3.Chip.Filter">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <!-- Category Icon (Optional) -->
+        <ImageView
+            android:id="@+id/imageIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:contentDescription="@string/category_icon"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible"
+            tools:src="@drawable/ic_category"/>
+
+        <!-- Category Name -->
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:textAppearance="?attr/textAppearanceCaption"
+            app:layout_constraintStart_toEndOf="@id/imageIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Category Name"/>
+
+        <!-- Item Count Badge -->
+        <TextView
+            android:id="@+id/textCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:minWidth="20dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            android:textColor="?attr/colorOnPrimary"
+            android:background="@drawable/bg_count_badge"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/textName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible"
+            tools:text="99+"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Custom Attributes -->
+    <declare-styleable name="CategoryChip">
+        <attr name="showIcon" format="boolean"/>
+        <attr name="showCount" format="boolean"/>
+        <attr name="iconTint" format="color"/>
+        <attr name="countTextColor" format="color"/>
+        <attr name="countBackgroundColor" format="color"/>
+        <attr name="maxCount" format="integer"/>
+    </declare-styleable>
+
+</com.google.android.material.chip.Chip>
