@@ -2,7 +2,7 @@
  * File: app/build.gradle
  * Created: 2025-06-03
  * Author: Vishalsnw
- * Last Modified: 2025-06-03 15:17:10 UTC
+ * Last Modified: 2025-06-03 15:29:56 UTC
  */
 
 plugins {
@@ -46,13 +46,22 @@ android {
 
     buildFeatures {
         viewBinding true
-        dataBinding true  // Added for data binding support
+        dataBinding true
     }
 
-    // Added to prevent conflicts
     packaging {
         resources {
-            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.txt', 'META-INF/notice.txt', 'META-INF/ASL2.0', 'META-INF/*.kotlin_module']
+            excludes += [
+                'META-INF/DEPENDENCIES',
+                'META-INF/LICENSE',
+                'META-INF/LICENSE.txt',
+                'META-INF/license.txt',
+                'META-INF/NOTICE',
+                'META-INF/NOTICE.txt',
+                'META-INF/notice.txt',
+                'META-INF/ASL2.0',
+                'META-INF/*.kotlin_module'
+            ]
         }
     }
 }
@@ -64,8 +73,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    // PDF Viewer - Changed to stable version
-    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    // PDF Viewer - Using a different library
+    implementation 'com.github.TalbotGooday:AndroidPDF:2.0.3'
 
     // Lifecycle components
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
@@ -85,14 +94,4 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-}
-
-// Optional: Add this if you're experiencing any dependency conflicts
-configurations.all {
-    resolutionStrategy {
-        force 'org.jetbrains.kotlin:kotlin-stdlib:1.9.10'
-        force 'org.jetbrains.kotlin:kotlin-stdlib-common:1.9.10'
-        force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10'
-        force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10'
-    }
 }
