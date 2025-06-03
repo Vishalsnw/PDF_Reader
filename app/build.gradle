@@ -34,12 +34,12 @@ android {
             minifyEnabled false
         }
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    
+
     kotlinOptions {
         jvmTarget = '17'
     }
@@ -73,7 +73,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
-    // PDF Viewer - Using a different library
+    // PDF Viewer (Barteksc - beta but works and resolves)
     implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
 
     // Lifecycle components
