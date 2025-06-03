@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  File: fade_transition.xml
+  Created: 2025-06-03
+  Author: Vishalsnw
+  Last Modified: 2025-06-03 04:58:19 UTC
+  
+  Copyright (c) 2025 Your App Name
+  Licensed under the MIT license.
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/fast_out_slow_in">
+
+    <!-- Fade out current page -->
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        android:duration="@integer/fade_duration"
+        android:interpolator="@android:interpolator/accelerate_cubic">
+
+        <scale
+            android:fromXScale="1.0"
+            android:toXScale="0.95"
+            android:fromYScale="1.0"
+            android:toYScale="0.95"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:duration="@integer/fade_duration"/>
+    </alpha>
+
+    <!-- Fade in new page -->
+    <alpha
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:duration="@integer/fade_duration"
+        android:startOffset="@integer/fade_offset"
+        android:interpolator="@android:interpolator/decelerate_cubic">
+
+        <scale
+            android:fromXScale="1.05"
+            android:toXScale="1.0"
+            android:fromYScale="1.05"
+            android:toYScale="1.0"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:duration="@integer/fade_duration"/>
+    </alpha>
+
+    <!-- Depth effect -->
+    <translate
+        android:fromYDelta="0"
+        android:toYDelta="0"
+        android:duration="@integer/fade_duration"
+        android:zAdjustment="top"/>
+
+    <!-- Overlay fade -->
+    <alpha
+        android:fromAlpha="0.0"
+        android:toAlpha="0.3"
+        android:duration="@integer/fade_overlay_duration"
+        android:interpolator="@android:interpolator/linear">
+        
+        <alpha
+            android:fromAlpha="0.3"
+            android:toAlpha="0.0"
+            android:startOffset="@integer/fade_overlay_duration"
+            android:duration="@integer/fade_overlay_duration"/>
+    </alpha>
+
+    <!-- Blur effect (API 31+) -->
+    <set android:ordering="sequentially">
+        <objectAnimator
+            android:propertyName="blurRadius"
+            android:duration="@integer/fade_duration"
+            android:valueFrom="0"
+            android:valueTo="25"
+            android:valueType="floatType"/>
+        
+        <objectAnimator
+            android:propertyName="blurRadius"
+            android:duration="@integer/fade_duration"
+            android:valueFrom="25"
+            android:valueTo="0"
+            android:valueType="floatType"/>
+    </set>
+</set>
