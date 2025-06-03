@@ -34,12 +34,13 @@ jobs:
             -keyalg RSA -keysize 2048 -validity 10000 \
             -dname "CN=Android Debug,O=Android,C=US"
 
-      - name: Build Release APK and extract errors
+      - name: Force refresh and build Release APK
         id: build
         continue-on-error: true
         shell: bash
         run: |
           set -o pipefail
+          ./gradlew clean --refresh-dependencies
           ./gradlew assembleRelease --stacktrace --info > build_output.txt 2>&1 || true
 
           if [ -f build_output.txt ]; then
