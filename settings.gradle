@@ -6,5 +6,5 @@ dependencyResolutionManagement {
         jcenter() // Optional
     }
 }
-rootProject.name = 'WhatsappCleanerPro'
+rootProject.name = 'Pdf_Reader'
 include ':app'
