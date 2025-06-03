@@ -2,14 +2,14 @@
  * File: settings.gradle
  * Created: 2025-06-03
  * Author: Vishalsnw
- * Last Modified: 2025-06-03 14:57:27 UTC
+ * Last Modified: 2025-06-03 15:29:56 UTC
  */
 
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
     }
 }
 
@@ -18,9 +18,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }
+        maven { url 'https://jitpack.io' }  // Required for PDF viewer
     }
 }
 
-rootProject.name = "app"
+rootProject.name = "Pdf_Reader"
 include ':app'
