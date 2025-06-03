@@ -74,7 +74,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // PDF Viewer - Using a different library
-    implementation 'com.github.TalbotGooday:AndroidPDF:2.0.3'
+    implementation 'com.github.TalbotGooday:AndroidPDF:3.1.0'
 
     // Lifecycle components
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
