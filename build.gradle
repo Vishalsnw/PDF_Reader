@@ -11,22 +11,8 @@ buildscript {
         agp_version = '8.1.1'
     }
 
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' } // Required for PDF viewer or other GitHub-hosted dependencies
-    }
-
     dependencies {
         classpath "com.android.tools.build:gradle:$agp_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' } // Ensure sub-projects have access too
     }
 }
