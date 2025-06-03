@@ -1,75 +1,22 @@
 /*
- * File: build.gradle (Project root)
+ * File: build.gradle
  * Created: 2025-06-03
  * Author: Vishalsnw
- * Last Modified: 2025-06-03 14:52:00 UTC
- *
- * Copyright (c) 2025 Your App Name
- * Licensed under the MIT license.
+ * Last Modified: 2025-06-03 14:57:27 UTC
  */
 
 buildscript {
     ext {
         kotlin_version = '1.9.10'
-        compose_version = '1.5.0'
-        room_version = '2.5.2'
-        lifecycle_version = '2.6.1'
-        coroutines_version = '1.7.3'
-    }
-
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+        agp_version = '8.1.1'
     }
     
-    dependencies {
-        classpath "com.android.tools.build:gradle:8.1.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        
-        // Optional: Add these if you're using them
-        // classpath "com.google.dagger:hilt-android-gradle-plugin:2.47"
-        // classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.7.1"
-    }
-}
-
-allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url "https://jitpack.io" }  // For PDF viewer dependency
-        
-        // Optional: Add these if needed
-        // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-// Optional: Add if you want to enforce consistent dependency versions
-subprojects {
-    configurations.all {
-        resolutionStrategy {
-            force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-            force "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
-            force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-        }
-    }
-}
-
-// Optional: Add if you want to enforce Java compatibility
-subprojects {
-    afterEvaluate { project ->
-        if (project.hasProperty('android')) {
-            android {
-                compileOptions {
-                    sourceCompatibility JavaVersion.VERSION_17
-                    targetCompatibility JavaVersion.VERSION_17
-                }
-            }
-        }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$agp_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
