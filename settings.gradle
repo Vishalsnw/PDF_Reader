@@ -1,10 +1,26 @@
-dependencyResolutionManagement {
-   // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+/*
+ * File: settings.gradle
+ * Created: 2025-06-03
+ * Author: Vishalsnw
+ * Last Modified: 2025-06-03 14:57:27 UTC
+ */
+
+pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Optional
+        gradlePluginPortal()
     }
 }
-rootProject.name = 'Pdf_Reader'
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+rootProject.name = "app"
 include ':app'
