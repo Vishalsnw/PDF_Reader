@@ -1,16 +1,16 @@
 # File: .github/workflows/android.yml
 # Created: 2025-06-04
 # Author: Vishalsnw
-# Last Modified: 2025-06-04 05:47:16 UTC
+# Last Modified: 2025-06-04 14:40:16 UTC
 
 name: Build Android APK
 
 on:
   workflow_dispatch:  # Manual trigger
   push:
-    branches: [ main, master ]  # Added for automatic builds
+    branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]  # Added for PR checks
+    branches: [ main, master ]
 
 jobs:
   build:
@@ -19,60 +19,74 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
-          cache: 'gradle'  # Added Gradle caching
+          cache: 'gradle'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: wrapper
+
+      - name: Configure Gradle
+        run: |
+          mkdir -p ~/.gradle
+          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError" > ~/.gradle/gradle.properties
+          echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
+          echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
+          echo "android.useAndroidX=true" >> ~/.gradle/gradle.properties
+          echo "android.enableJetifier=true" >> ~/.gradle/gradle.properties
 
       - name: Generate debug keystore
         run: |
-          mkdir -p .github/keystore
-          keytool -genkey -v \
-            -keystore .github/keystore/debug.keystore \
-            -alias androiddebugkey \
+          mkdir -p .android
+          keytool -genkeypair \
+            -keystore .android/debug.keystore \
             -storepass android \
             -keypass android \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -dname "CN=Android Debug,O=Android,C=US"
+            -alias androiddebugkey \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US" \
+            -v
 
-      - name: Force refresh and build Release APK
+      - name: Build and Extract Errors
         id: build
         continue-on-error: true
         shell: bash
         run: |
-          # Add Gradle properties for better build performance
-          mkdir -p ~/.gradle
-          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError" >> ~/.gradle/gradle.properties
-          echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
-          echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
-          
-          set -o pipefail
+          chmod +x ./gradlew
           ./gradlew clean --refresh-dependencies --stacktrace
           ./gradlew assembleRelease --stacktrace --info > build_output.txt 2>&1 || true
 
           if [ -f build_output.txt ]; then
+            # Extract specific error patterns
             grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed for task|resource linking failed|resource .+ not found" \
               build_output.txt > errors_only.txt || true
 
             if [ ! -s errors_only.txt ]; then
-              echo "No error patterns detected in the build log." > errors_only.txt
-              echo "Last 50 lines of build output:" >> errors_only.txt
+              echo "No specific errors found. Showing last relevant output:" > errors_only.txt
+              echo "----------------------------------------" >> errors_only.txt
               tail -n 50 build_output.txt >> errors_only.txt
             fi
           else
-            echo "Build log not found!" > errors_only.txt
+            echo "Build process failed to create output log!" > errors_only.txt
           fi
 
-      - name: Upload error-only log
+      - name: Upload Error Log
         uses: actions/upload-artifact@v4
         with:
           name: Build-Errors-${{ github.run_number }}
@@ -95,7 +109,7 @@ jobs:
             $ZIPALIGN -v -p 4 "$APK_PATH" aligned.apk
 
             $APKSIGNER sign \
-              --ks .github/keystore/debug.keystore \
+              --ks .android/debug.keystore \
               --ks-pass pass:android \
               --key-pass pass:android \
               --out Pdf_Reader-release-signed.apk \
@@ -107,7 +121,7 @@ jobs:
             echo "No APK found at $APK_PATH"
           fi
 
-      - name: Upload signed APK
+      - name: Upload Signed Release APK
         if: env.APK_EXISTS == 'true'
         uses: actions/upload-artifact@v4
         with:
@@ -115,11 +129,14 @@ jobs:
           path: Pdf_Reader-release-signed.apk
           retention-days: 30
 
-      # Added debug APK build as fallback
       - name: Build Debug APK
         if: env.APK_EXISTS != 'true'
         run: |
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug --stacktrace || {
+            grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed for task|resource linking failed|resource .+ not found" \
+              debug_build.log > debug_errors.txt || true
+            exit 1
+          }
           echo "DEBUG_APK_EXISTS=true" >> $GITHUB_ENV
 
       - name: Upload Debug APK
