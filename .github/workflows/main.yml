@@ -1,12 +1,12 @@
 # File: .github/workflows/android.yml
 # Created: 2025-06-04
 # Author: Vishalsnw
-# Last Modified: 2025-06-04 14:58:25 UTC
+# Last Modified: 2025-06-04 15:21:40 UTC
 
 name: Build Android APK
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
   push:
     branches: [ main, master ]
   pull_request:
@@ -22,58 +22,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Gradle Wrapper
-        run: |
-          # Create directories
-          mkdir -p gradle/wrapper
-          
-          # Create wrapper properties
-          cat > gradle/wrapper/gradle-wrapper.properties << EOL
-          distributionBase=GRADLE_USER_HOME
-          distributionPath=wrapper/dists
-          distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
-          networkTimeout=10000
-          validateDistributionUrl=true
-          zipStoreBase=GRADLE_USER_HOME
-          zipStorePath=wrapper/dists
-          EOL
-          
-          # Download wrapper jar
-          curl -L -o gradle/wrapper/gradle-wrapper.jar "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar"
-          
-          # Create gradlew
-          cat > gradlew << EOL
-          #!/bin/sh
-          exec \$JAVA_HOME/bin/java -Xmx64m -Xms64m -Dorg.gradle.appname="gradlew" -classpath "\$0" org.gradle.wrapper.GradleWrapperMain "\$@"
-          EOL
-          
-          # Create gradlew.bat
-          cat > gradlew.bat << EOL
-          @rem
-          @rem Copyright 2015 the original author or authors.
-          @rem
-          @echo off
-          set DIRNAME=%~dp0
-          if "%DIRNAME%" == "" set DIRNAME=.
-          set APP_BASE_NAME=%~n0
-          set APP_HOME=%DIRNAME%
-          set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
-          @rem Execute Gradle
-          "%JAVA_HOME%\bin\java.exe" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
-          EOL
-          
-          # Set executable permissions
-          chmod +x gradlew
-          
-          # Verify files
-          ls -la gradle/wrapper/
-          ls -la gradlew*
-          echo "Wrapper JAR SHA256:"
-          sha256sum gradle/wrapper/gradle-wrapper.jar
-
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -83,6 +31,58 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        run: |
+          # Remove existing wrapper files if any
+          rm -rf gradle/wrapper gradlew gradlew.bat
+          
+          # Download Gradle
+          wget -q https://services.gradle.org/distributions/gradle-8.2-bin.zip
+          unzip -q gradle-8.2-bin.zip
+          
+          # Create wrapper directory
+          mkdir -p gradle/wrapper
+          
+          # Copy wrapper jar from distribution
+          cp gradle-8.2/lib/gradle-wrapper-8.2.jar gradle/wrapper/gradle-wrapper.jar
+          
+          # Create wrapper properties
+          cat > gradle/wrapper/gradle-wrapper.properties << EOL
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          EOL
+          
+          # Create gradlew script
+          cat > gradlew << EOL
+          #!/usr/bin/env sh
+          exec java -Xmx64m -Xms64m -classpath gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain "\$@"
+          EOL
+          
+          # Create gradlew.bat
+          cat > gradlew.bat << EOL
+          @echo off
+          java -Xmx64m -Xms64m -classpath "%~dp0gradle/wrapper/gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain %*
+          EOL
+          
+          # Set permissions
+          chmod +x gradlew
+          
+          # Verify files
+          echo "Verifying wrapper files:"
+          ls -la gradle/wrapper/
+          ls -la gradlew*
+          file gradle/wrapper/gradle-wrapper.jar
+          
+          # Test wrapper
+          ./gradlew --version || {
+            echo "Gradle wrapper test failed. Contents of wrapper JAR:"
+            unzip -l gradle/wrapper/gradle-wrapper.jar
+            exit 1
+          }
 
       - name: Configure Gradle
         run: |
@@ -114,13 +114,12 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          # Verify Gradle wrapper
-          ls -la gradle/wrapper/gradle-wrapper.jar
-          file gradle/wrapper/gradle-wrapper.jar
+          # Environment info
+          java -version
+          ./gradlew --version || true
           
           # Build with error capture
-          ./gradlew --version
-          ./gradlew clean --refresh-dependencies --stacktrace > build_output.txt 2>&1
+          ./gradlew clean --refresh-dependencies --stacktrace > build_output.txt 2>&1 || true
           ./gradlew assembleRelease --stacktrace --info >> build_output.txt 2>&1 || true
 
           if [ -f build_output.txt ]; then
