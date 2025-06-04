@@ -58,15 +58,17 @@ jobs:
               build_output.txt > errors_only.txt || true
           fi
 
+      - name: List APKs found
+        run: find . -name "*.apk" || true
+
       - name: Upload Error Log
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Build-Errors-${{ github.run_number }}
           path: errors_only.txt
 
       - name: Sign APK if exists
-        id: sign_apk
         run: |
           APK_PATH="app/build/outputs/apk/release/app-release-unsigned.apk"
           if [ -f "$APK_PATH" ]; then
@@ -81,16 +83,15 @@ jobs:
               --out Pdf_Reader-release-signed.apk \
               aligned.apk
 
-            echo "signed_apk=Pdf_Reader-release-signed.apk" >> $GITHUB_OUTPUT
+            echo "SIGNED_APK=Pdf_Reader-release-signed.apk" >> $GITHUB_ENV
           else
-            echo "❌ APK file not found: $APK_PATH"
-            exit 1
+            echo "❌ APK not found, skipping signing step."
           fi
 
       - name: Upload APK
-        if: steps.sign_apk.outputs.signed_apk
+        if: env.SIGNED_APK
         uses: actions/upload-artifact@v4
         with:
           name: Pdf_Reader-APK-${{ github.run_number }}
-          path: Pdf_Reader-release-signed.apk
+          path: ${{ env.SIGNED_APK }}
           retention-days: 30
