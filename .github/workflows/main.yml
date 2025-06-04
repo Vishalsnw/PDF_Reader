@@ -1,7 +1,7 @@
 # File: .github/workflows/android.yml
 # Created: 2025-06-04
 # Author: Vishalsnw
-# Last Modified: 2025-06-04 14:40:16 UTC
+# Last Modified: 2025-06-04 14:52:15 UTC
 
 name: Build Android APK
 
@@ -21,6 +21,27 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Create Gradle Wrapper
+        run: |
+          mkdir -p gradle/wrapper
+          echo "distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
+          networkTimeout=10000
+          validateDistributionUrl=true
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists" > gradle/wrapper/gradle-wrapper.properties
+          
+          curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar
+          
+          echo "#!/bin/sh
+          exec java -Xmx64m -Xms64m -Dorg.gradle.appname=\"gradlew\" -classpath \"\$0\" org.gradle.wrapper.GradleWrapperMain \"\$@\"" > gradlew
+          
+          echo "@echo off
+          java -Xmx64m -Xms64m -Dorg.gradle.appname=gradlew -classpath \"%~dp0gradle/wrapper/gradle-wrapper.jar\" org.gradle.wrapper.GradleWrapperMain %*" > gradlew.bat
+          
+          chmod +x gradlew
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -68,7 +89,6 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          chmod +x ./gradlew
           ./gradlew clean --refresh-dependencies --stacktrace
           ./gradlew assembleRelease --stacktrace --info > build_output.txt 2>&1 || true
 
