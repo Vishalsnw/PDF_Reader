@@ -57,7 +57,7 @@ jobs:
           chmod +x ./gradlew
           ./gradlew clean assembleRelease --stacktrace --info > build_output.txt 2>&1 || true
           if [ -f build_output.txt ]; then
-            grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed" \
+            grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed|resource linking failed" \
               build_output.txt > errors_only.txt || true
           fi
 
