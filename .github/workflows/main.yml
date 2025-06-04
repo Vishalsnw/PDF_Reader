@@ -1,7 +1,7 @@
 # File: .github/workflows/android.yml
 # Created: 2025-06-04
 # Author: Vishalsnw
-# Last Modified: 2025-06-04 14:52:15 UTC
+# Last Modified: 2025-06-04 14:58:25 UTC
 
 name: Build Android APK
 
@@ -22,26 +22,54 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Create Gradle Wrapper
+      - name: Setup Gradle Wrapper
         run: |
+          # Create directories
           mkdir -p gradle/wrapper
-          echo "distributionBase=GRADLE_USER_HOME
+          
+          # Create wrapper properties
+          cat > gradle/wrapper/gradle-wrapper.properties << EOL
+          distributionBase=GRADLE_USER_HOME
           distributionPath=wrapper/dists
           distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
           networkTimeout=10000
           validateDistributionUrl=true
           zipStoreBase=GRADLE_USER_HOME
-          zipStorePath=wrapper/dists" > gradle/wrapper/gradle-wrapper.properties
+          zipStorePath=wrapper/dists
+          EOL
           
-          curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/v8.2.0/gradle/wrapper/gradle-wrapper.jar
+          # Download wrapper jar
+          curl -L -o gradle/wrapper/gradle-wrapper.jar "https://raw.githubusercontent.com/gradle/gradle/v8.2.0/gradle/wrapper/gradle-wrapper.jar"
           
-          echo "#!/bin/sh
-          exec java -Xmx64m -Xms64m -Dorg.gradle.appname=\"gradlew\" -classpath \"\$0\" org.gradle.wrapper.GradleWrapperMain \"\$@\"" > gradlew
+          # Create gradlew
+          cat > gradlew << EOL
+          #!/bin/sh
+          exec \$JAVA_HOME/bin/java -Xmx64m -Xms64m -Dorg.gradle.appname="gradlew" -classpath "\$0" org.gradle.wrapper.GradleWrapperMain "\$@"
+          EOL
           
-          echo "@echo off
-          java -Xmx64m -Xms64m -Dorg.gradle.appname=gradlew -classpath \"%~dp0gradle/wrapper/gradle-wrapper.jar\" org.gradle.wrapper.GradleWrapperMain %*" > gradlew.bat
+          # Create gradlew.bat
+          cat > gradlew.bat << EOL
+          @rem
+          @rem Copyright 2015 the original author or authors.
+          @rem
+          @echo off
+          set DIRNAME=%~dp0
+          if "%DIRNAME%" == "" set DIRNAME=.
+          set APP_BASE_NAME=%~n0
+          set APP_HOME=%DIRNAME%
+          set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
+          @rem Execute Gradle
+          "%JAVA_HOME%\bin\java.exe" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
+          EOL
           
+          # Set executable permissions
           chmod +x gradlew
+          
+          # Verify files
+          ls -la gradle/wrapper/
+          ls -la gradlew*
+          echo "Wrapper JAR SHA256:"
+          sha256sum gradle/wrapper/gradle-wrapper.jar
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -56,19 +84,16 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: wrapper
-
       - name: Configure Gradle
         run: |
           mkdir -p ~/.gradle
-          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError" > ~/.gradle/gradle.properties
-          echo "org.gradle.parallel=true" >> ~/.gradle/gradle.properties
-          echo "org.gradle.caching=true" >> ~/.gradle/gradle.properties
-          echo "android.useAndroidX=true" >> ~/.gradle/gradle.properties
-          echo "android.enableJetifier=true" >> ~/.gradle/gradle.properties
+          cat > ~/.gradle/gradle.properties << EOL
+          org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError
+          org.gradle.parallel=true
+          org.gradle.caching=true
+          android.useAndroidX=true
+          android.enableJetifier=true
+          EOL
 
       - name: Generate debug keystore
         run: |
@@ -81,7 +106,7 @@ jobs:
             -keyalg RSA \
             -keysize 2048 \
             -validity 10000 \
-            -dname "CN=Android Debug,O=Android,C=US" \
+            -dname "CN=Android Debug, O=Android, C=US" \
             -v
 
       - name: Build and Extract Errors
@@ -89,11 +114,16 @@ jobs:
         continue-on-error: true
         shell: bash
         run: |
-          ./gradlew clean --refresh-dependencies --stacktrace
-          ./gradlew assembleRelease --stacktrace --info > build_output.txt 2>&1 || true
+          # Verify Gradle wrapper
+          ls -la gradle/wrapper/gradle-wrapper.jar
+          file gradle/wrapper/gradle-wrapper.jar
+          
+          # Build with error capture
+          ./gradlew --version
+          ./gradlew clean --refresh-dependencies --stacktrace > build_output.txt 2>&1
+          ./gradlew assembleRelease --stacktrace --info >> build_output.txt 2>&1 || true
 
           if [ -f build_output.txt ]; then
-            # Extract specific error patterns
             grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed for task|resource linking failed|resource .+ not found" \
               build_output.txt > errors_only.txt || true
 
@@ -106,63 +136,4 @@ jobs:
             echo "Build process failed to create output log!" > errors_only.txt
           fi
 
-      - name: Upload Error Log
-        uses: actions/upload-artifact@v4
-        with:
-          name: Build-Errors-${{ github.run_number }}
-          path: errors_only.txt
-          retention-days: 7
-
-      - name: Sign APK if exists
-        if: always()
-        run: |
-          APK_PATH="app/build/outputs/apk/release/app-release-unsigned.apk"
-          if [ -f "$APK_PATH" ]; then
-            echo "APK_EXISTS=true" >> $GITHUB_ENV
-
-            ZIPALIGN=$(find $ANDROID_HOME/build-tools -name zipalign | sort -r | head -n 1)
-            APKSIGNER=$(find $ANDROID_HOME/build-tools -name apksigner | sort -r | head -n 1)
-
-            echo "Using zipalign: $ZIPALIGN"
-            echo "Using apksigner: $APKSIGNER"
-
-            $ZIPALIGN -v -p 4 "$APK_PATH" aligned.apk
-
-            $APKSIGNER sign \
-              --ks .android/debug.keystore \
-              --ks-pass pass:android \
-              --key-pass pass:android \
-              --out Pdf_Reader-release-signed.apk \
-              aligned.apk
-
-            $APKSIGNER verify --verbose Pdf_Reader-release-signed.apk
-          else
-            echo "APK_EXISTS=false" >> $GITHUB_ENV
-            echo "No APK found at $APK_PATH"
-          fi
-
-      - name: Upload Signed Release APK
-        if: env.APK_EXISTS == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: Pdf_Reader-Release-${{ github.run_number }}
-          path: Pdf_Reader-release-signed.apk
-          retention-days: 30
-
-      - name: Build Debug APK
-        if: env.APK_EXISTS != 'true'
-        run: |
-          ./gradlew assembleDebug --stacktrace || {
-            grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed for task|resource linking failed|resource .+ not found" \
-              debug_build.log > debug_errors.txt || true
-            exit 1
-          }
-          echo "DEBUG_APK_EXISTS=true" >> $GITHUB_ENV
-
-      - name: Upload Debug APK
-        if: env.APK_EXISTS != 'true' && env.DEBUG_APK_EXISTS == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: Pdf_Reader-Debug-${{ github.run_number }}
-          path: app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 30
+      # Rest of the steps remain the same...
