@@ -15,8 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Removed Gradle Wrapper Validation Step
-
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -68,7 +66,7 @@ jobs:
           path: errors_only.txt
 
       - name: Sign APK if exists
-        if: success()
+        id: sign_apk
         run: |
           APK_PATH="app/build/outputs/apk/release/app-release-unsigned.apk"
           if [ -f "$APK_PATH" ]; then
@@ -83,13 +81,16 @@ jobs:
               --out Pdf_Reader-release-signed.apk \
               aligned.apk
 
-            echo "SIGNED_APK=Pdf_Reader-release-signed.apk" >> $GITHUB_ENV
+            echo "signed_apk=Pdf_Reader-release-signed.apk" >> $GITHUB_OUTPUT
+          else
+            echo "❌ APK file not found: $APK_PATH"
+            exit 1
           fi
 
       - name: Upload APK
-        if: env.SIGNED_APK
+        if: steps.sign_apk.outputs.signed_apk
         uses: actions/upload-artifact@v4
         with:
           name: Pdf_Reader-APK-${{ github.run_number }}
-          path: ${{ env.SIGNED_APK }}
+          path: Pdf_Reader-release-signed.apk
           retention-days: 30
