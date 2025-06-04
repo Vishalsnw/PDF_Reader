@@ -1,12 +1,12 @@
 # File: .github/workflows/android.yml
 # Created: 2025-06-04
 # Author: Vishalsnw
-# Last Modified: 2025-06-04 15:21:40 UTC
+# Last Modified: 2025-06-04 15:26:12 UTC
 
 name: Build Android APK
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Manual trigger
   push:
     branches: [ main, master ]
   pull_request:
@@ -22,32 +22,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'gradle'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Setup Gradle
+      - name: Setup Gradle Wrapper
         run: |
-          # Remove existing wrapper files if any
-          rm -rf gradle/wrapper gradlew gradlew.bat
-          
-          # Download Gradle
-          wget -q https://services.gradle.org/distributions/gradle-8.2-bin.zip
-          unzip -q gradle-8.2-bin.zip
-          
-          # Create wrapper directory
           mkdir -p gradle/wrapper
-          
-          # Copy wrapper jar from distribution
-          cp gradle-8.2/lib/gradle-wrapper-8.2.jar gradle/wrapper/gradle-wrapper.jar
-          
-          # Create wrapper properties
+          # Create wrapper properties file
           cat > gradle/wrapper/gradle-wrapper.properties << EOL
           distributionBase=GRADLE_USER_HOME
           distributionPath=wrapper/dists
@@ -59,13 +37,13 @@ jobs:
           # Create gradlew script
           cat > gradlew << EOL
           #!/usr/bin/env sh
-          exec java -Xmx64m -Xms64m -classpath gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain "\$@"
+          exec java -Xmx64m -Xms64m -classpath "\$0.jar" org.gradle.wrapper.GradleWrapperMain "\$@"
           EOL
           
           # Create gradlew.bat
           cat > gradlew.bat << EOL
           @echo off
-          java -Xmx64m -Xms64m -classpath "%~dp0gradle/wrapper/gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain %*
+          java -Xmx64m -Xms64m -classpath "%~dp0%~n0.jar" org.gradle.wrapper.GradleWrapperMain %*
           EOL
           
           # Set permissions
@@ -75,14 +53,19 @@ jobs:
           echo "Verifying wrapper files:"
           ls -la gradle/wrapper/
           ls -la gradlew*
-          file gradle/wrapper/gradle-wrapper.jar
-          
-          # Test wrapper
-          ./gradlew --version || {
-            echo "Gradle wrapper test failed. Contents of wrapper JAR:"
-            unzip -l gradle/wrapper/gradle-wrapper.jar
-            exit 1
-          }
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Configure Gradle
         run: |
@@ -135,4 +118,63 @@ jobs:
             echo "Build process failed to create output log!" > errors_only.txt
           fi
 
-      # Rest of the steps remain the same...
+      - name: Upload Error Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: Build-Errors-${{ github.run_number }}
+          path: errors_only.txt
+          retention-days: 7
+
+      - name: Sign APK if exists
+        if: always()
+        run: |
+          APK_PATH="app/build/outputs/apk/release/app-release-unsigned.apk"
+          if [ -f "$APK_PATH" ]; then
+            echo "APK_EXISTS=true" >> $GITHUB_ENV
+
+            ZIPALIGN=$(find $ANDROID_HOME/build-tools -name zipalign | sort -r | head -n 1)
+            APKSIGNER=$(find $ANDROID_HOME/build-tools -name apksigner | sort -r | head -n 1)
+
+            echo "Using zipalign: $ZIPALIGN"
+            echo "Using apksigner: $APKSIGNER"
+
+            $ZIPALIGN -v -p 4 "$APK_PATH" aligned.apk
+
+            $APKSIGNER sign \
+              --ks .android/debug.keystore \
+              --ks-pass pass:android \
+              --key-pass pass:android \
+              --out Pdf_Reader-release-signed.apk \
+              aligned.apk
+
+            $APKSIGNER verify --verbose Pdf_Reader-release-signed.apk
+          else
+            echo "APK_EXISTS=false" >> $GITHUB_ENV
+            echo "No APK found at $APK_PATH"
+          fi
+
+      - name: Upload Signed Release APK
+        if: env.APK_EXISTS == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pdf_Reader-Release-${{ github.run_number }}
+          path: Pdf_Reader-release-signed.apk
+          retention-days: 30
+
+      - name: Build Debug APK
+        if: env.APK_EXISTS != 'true'
+        run: |
+          ./gradlew assembleDebug --stacktrace || {
+            grep -E "e: .*\.kt:[0-9]+:[0-9]+|error:|Unresolved reference:|cannot find symbol|Exception|Caused by|Execution failed for task|resource linking failed|resource .+ not found" \
+              debug_build.log > debug_errors.txt || true
+            exit 1
+          }
+          echo "DEBUG_APK_EXISTS=true" >> $GITHUB_ENV
+
+      - name: Upload Debug APK
+        if: env.APK_EXISTS != 'true' && env.DEBUG_APK_EXISTS == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Pdf_Reader-Debug-${{ github.run_number }}
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
