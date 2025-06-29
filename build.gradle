@@ -1,18 +1,22 @@
-/*
- * File: build.gradle
- * Created: 2025-06-03
- * Author: Vishalsnw
- * Last Modified: 2025-06-03 14:57:27 UTC
- */
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
 
-buildscript {
-    ext {
-        kotlin_version = '1.9.10'
-        agp_version = '8.1.1'
-    }
+repositories {
+    mavenCentral()
+}
 
-    dependencies {
-        classpath "com.android.tools.build:gradle:$agp_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+application {
+    mainClass = 'com.example.pdfreader.HelloApplication'
+}
+
+dependencies {
+    implementation 'org.apache.pdfbox:pdfbox:3.0.1'
 }
