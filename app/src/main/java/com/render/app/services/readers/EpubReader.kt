@@ -8,22 +8,20 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.reader
+package com.render.app.services.readers
 
 import android.content.Context
 import android.graphics.RectF
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.reader.app.models.ReadingMode
-import com.reader.app.utils.EpubUtils
-import com.reader.app.utils.FileUtils
-import com.reader.app.utils.HtmlUtils
+import com.render.app.models.ReadingMode
+import com.render.app.utils.EpubUtils
+import com.render.app.utils.FileUtils
+import com.render.app.utils.HtmlUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
-import nl.siegmann.epublib.domain.Book
-import nl.siegmann.epublib.epub.EpubReader
 import java.io.File
 import java.io.FileInputStream
 import kotlin.coroutines.resume

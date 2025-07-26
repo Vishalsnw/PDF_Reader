@@ -7,7 +7,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.activities
+package com.render.app.activities
 
 import android.content.res.Configuration
 import android.graphics.Color
@@ -24,17 +24,17 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
-import com.reader.app.R
-import com.reader.app.databinding.ActivityReaderBinding
-import com.reader.app.models.BookProgress
-import com.reader.app.models.ReadingMode
-import com.reader.app.models.ReaderSettings
-import com.reader.app.services.readers.BaseReader
-import com.reader.app.services.readers.EpubReader
-import com.reader.app.services.readers.PdfReader
-import com.reader.app.utils.AnimationUtils
-import com.reader.app.utils.SystemUiUtil
-import com.reader.app.viewmodels.ReaderViewModel
+import com.render.app.R
+import com.render.app.databinding.ActivityReaderBinding
+import com.render.app.models.BookProgress
+import com.render.app.models.ReadingMode
+import com.render.app.models.ReaderSettings
+import com.render.app.services.readers.BaseReader
+import com.render.app.services.readers.EpubReader
+import com.render.app.services.readers.PdfReader
+import com.render.app.utils.AnimationUtils
+import com.render.app.utils.SystemUiUtil
+import com.render.app.viewmodels.ReaderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

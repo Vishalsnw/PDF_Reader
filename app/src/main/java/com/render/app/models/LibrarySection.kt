@@ -8,11 +8,11 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.models
+package com.render.app.models
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.reader.app.R
+import com.render.app.R
 
 /**
  * LibrarySection represents different sections in the library view.

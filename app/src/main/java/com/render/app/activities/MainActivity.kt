@@ -7,7 +7,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.activities
+package com.render.app.activities
 
 import android.Manifest
 import android.content.Intent
@@ -27,12 +27,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.reader.app.R
-import com.reader.app.adapters.BookListAdapter
-import com.reader.app.databinding.ActivityMainBinding
-import com.reader.app.models.Book
-import com.reader.app.utils.FileUtils
-import com.reader.app.viewmodels.LibraryViewModel
+import com.render.app.R
+import com.render.app.adapters.BookListAdapter
+import com.render.app.databinding.ActivityMainBinding
+import com.render.app.models.Book
+import com.render.app.utils.FileUtils
+import com.render.app.viewmodels.LibraryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
