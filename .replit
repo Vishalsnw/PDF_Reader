@@ -1,9 +1,8 @@
-run = "npm run dev"
 [nix]
-channel = "stable-25_05"
+channel = "stable-23_05"
 
 [deployment]
-run = ["sh", "-c", "npm run dev"]
+run = ["sh", "-c", "./gradlew run"]
 
 [workflows]
 runButton = "Build and Run JavaFX App"
