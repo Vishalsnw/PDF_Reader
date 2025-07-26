@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.database
+package com.render.app.database
 
 import android.content.Context
 import androidx.room.Database
@@ -17,14 +17,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.reader.app.database.converters.DateConverter
-import com.reader.app.database.converters.ListConverter
-import com.reader.app.database.dao.BookDao
-import com.reader.app.database.dao.CategoryDao
-import com.reader.app.database.dao.ChapterDao
-import com.reader.app.models.Book
-import com.reader.app.models.Category
-import com.reader.app.models.Chapter
+import com.render.app.database.converters.DateConverter
+import com.render.app.database.converters.ListConverter
+import com.render.app.database.dao.BookDao
+import com.render.app.database.dao.CategoryDao
+import com.render.app.database.dao.ChapterDao
+import com.render.app.models.Book
+import com.render.app.models.Category
+import com.render.app.models.Chapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

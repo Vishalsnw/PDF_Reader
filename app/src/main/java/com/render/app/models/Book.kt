@@ -227,3 +227,32 @@ enum class ReadingState {
     IN_PROGRESS,
     COMPLETED
 }
+package com.render.app.models
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import java.util.Date
+
+@Entity(tableName = "books")
+data class Book(
+    @PrimaryKey
+    val id: String,
+    val title: String,
+    val author: String = "",
+    val filePath: String,
+    val coverPath: String? = null,
+    val totalPages: Int = 0,
+    val currentPage: Int = 0,
+    val progress: Int = 0,
+    val isDownloaded: Boolean = false,
+    val isFavorite: Boolean = false,
+    val lastReadTime: Date? = null,
+    val addedTime: Date = Date(),
+    val fileSize: Long = 0,
+    val format: String = "",
+    val description: String = "",
+    val categories: List<String> = emptyList(),
+    @ColumnInfo(name = "reading_time")
+    val readingTime: Long = 0
+)

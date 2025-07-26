@@ -202,3 +202,23 @@ interface ChapterDao {
         const val PROGRESS_COMPLETE = 100
     }
 }
+package com.render.app.database.dao
+
+import androidx.room.*
+import com.render.app.models.Chapter
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface ChapterDao {
+    @Query("SELECT * FROM chapters WHERE bookId = :bookId")
+    fun getChaptersByBookId(bookId: String): Flow<List<Chapter>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(chapter: Chapter)
+
+    @Update
+    suspend fun update(chapter: Chapter)
+
+    @Delete
+    suspend fun delete(chapter: Chapter)
+}

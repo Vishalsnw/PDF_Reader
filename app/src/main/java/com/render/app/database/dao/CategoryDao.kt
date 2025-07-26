@@ -214,3 +214,26 @@ interface CategoryDao {
         const val DEFAULT_COLOR = 0xFF2196F3.toInt() // Material Blue
     }
 }
+package com.render.app.database.dao
+
+import androidx.room.*
+import com.render.app.models.Category
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface CategoryDao {
+    @Query("SELECT * FROM categories")
+    fun getAllCategories(): Flow<List<Category>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(category: Category)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(categories: List<Category>)
+
+    @Update
+    suspend fun update(category: Category)
+
+    @Delete
+    suspend fun delete(category: Category)
+}

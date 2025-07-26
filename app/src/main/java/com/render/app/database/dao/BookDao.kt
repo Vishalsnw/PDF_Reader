@@ -187,3 +187,43 @@ interface BookDao {
         const val PROGRESS_COMPLETE = 100
     }
 }
+package com.render.app.database.dao
+
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
+import com.render.app.models.Book
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface BookDao {
+    @Query("SELECT * FROM books")
+    fun getAllBooks(): Flow<List<Book>>
+
+    @Query("SELECT * FROM books WHERE id = :id")
+    suspend fun getBookById(id: String): Book?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(book: Book)
+
+    @Update
+    suspend fun update(book: Book)
+
+    @Delete
+    suspend fun delete(book: Book)
+
+    @Query("DELETE FROM books WHERE id IN (:bookIds)")
+    suspend fun deleteBooksByIds(bookIds: List<String>)
+
+    @Query("DELETE FROM books WHERE isDownloaded = 0")
+    suspend fun deleteUndownloadedBooks()
+
+    @RawQuery(observedEntities = [Book::class])
+    fun getBooksByCustomQuery(query: SupportSQLiteQuery): Flow<List<Book>>
+
+    @Transaction
+    suspend fun updateBooksInBatch(books: List<Book>) {
+        books.forEach { book ->
+            update(book)
+        }
+    }
+}
