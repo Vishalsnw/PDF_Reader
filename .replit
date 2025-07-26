@@ -23,6 +23,10 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
+args = "./gradlew clean"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
 args = "./gradlew build"
 
 [[workflows.workflow.tasks]]
