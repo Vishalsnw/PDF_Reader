@@ -6,7 +6,7 @@ channel = "stable-25_05"
 run = ["sh", "-c", "npm run dev"]
 
 [workflows]
-runButton = "Build Android App"
+runButton = "Build and Run JavaFX App"
 
 [[workflows.workflow]]
 name = "Build Android App"
@@ -16,3 +16,16 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "./gradlew build"
+
+[[workflows.workflow]]
+name = "Build and Run JavaFX App"
+author = 45580165
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew build"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew run"
