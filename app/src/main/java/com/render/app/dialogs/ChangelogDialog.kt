@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.dialogs
+package com.render.app.dialogs
 
 import android.app.Dialog
 import android.content.Context
@@ -16,12 +16,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.reader.app.R
-import com.reader.app.databinding.DialogChangelogBinding
-import com.reader.app.models.ChangelogItem
-import com.reader.app.adapters.ChangelogAdapter
-import com.reader.app.utils.AppVersionUtils
-import com.reader.app.utils.PreferenceUtils
+import com.render.app.R
+import com.render.app.databinding.DialogChangelogBinding
+import com.render.app.models.ChangelogItem
+import com.render.app.adapters.ChangelogAdapter
+import com.render.app.utils.AppVersionUtils
+import com.render.app.utils.PreferenceUtils
 
 /**
  * ChangelogDialog displays app version changes in a material design dialog.

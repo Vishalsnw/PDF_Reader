@@ -15,15 +15,63 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "export JAVA_HOME=$(find /nix/store -name \"*openjdk-17*\" -type d | head -1)"
+args = "mkdir -p /tmp/android-sdk"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "export PATH=$JAVA_HOME/bin:$PATH"
+args = "cd /tmp/android-sdk"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "export ANDROID_SDK_ROOT=$(find /nix/store -name \"*android-sdk*\" -type d | head -1)"
+args = "if [ ! -d \"cmdline-tools\" ]; then"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  wget -q https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  unzip -q commandlinetools-linux-9477386_latest.zip"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  mkdir -p cmdline-tools/latest"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "  mv cmdline-tools/* cmdline-tools/latest/ 2>/dev/null || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "fi"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export JAVA_HOME=/nix/store/$(ls /nix/store | grep openjdk-17 | head -1)"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export PATH=$JAVA_HOME/bin:/tmp/android-sdk/cmdline-tools/latest/bin:$PATH"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export ANDROID_HOME=/tmp/android-sdk"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export ANDROID_SDK_ROOT=/tmp/android-sdk"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd /home/runner/$(basename $PWD)"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "yes | sdkmanager --licenses >/dev/null 2>&1 || true"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "sdkmanager \"platform-tools\" \"platforms;android-34\" \"build-tools;34.0.0\" >/dev/null 2>&1 || true"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -31,8 +79,4 @@ args = "chmod +x ./gradlew"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./gradlew clean"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew assembleDebug --stacktrace"
+args = "./gradlew clean assembleDebug --stacktrace --info"
