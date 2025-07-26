@@ -1,36 +1,6 @@
-modules = ["nix"]
-run = "./gradlew build"
+run = "npm run dev"
 [nix]
 channel = "stable-25_05"
 
 [deployment]
-run = ["sh", "-c", "./gradlew build"]
-
-[workflows]
-runButton = "Build and Run JavaFX App"
-
-[[workflows.workflow]]
-name = "Build Android App"
-author = 45580165
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew build"
-
-[[workflows.workflow]]
-name = "Build and Run JavaFX App"
-author = 45580165
-mode = "sequential"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew clean"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew build"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "./gradlew run"
+run = ["sh", "-c", "npm run dev"]
