@@ -1,9 +1,14 @@
-run = "npm run dev"
+
 [nix]
 channel = "stable-25_05"
 
+[env]
+JAVA_HOME = "/nix/store/$(nix-instantiate --eval -E '(import <nixpkgs> {}).openjdk17' | tr -d '"')/lib/openjdk"
+ANDROID_HOME = "/nix/store/$(nix-instantiate --eval -E '(import <nixpkgs> {}).androidenv.androidPkgs_9_0.platform-tools' | tr -d '"')"
+PATH = "$JAVA_HOME/bin:$ANDROID_HOME:$PATH"
+
 [deployment]
-run = ["sh", "-c", "npm run dev"]
+run = ["sh", "-c", "./gradlew assembleDebug"]
 
 [workflows]
 runButton = "Build Android App"
