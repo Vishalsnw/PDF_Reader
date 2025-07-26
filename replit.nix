@@ -1,7 +1,9 @@
 
 { pkgs }: {
   deps = [
-    pkgs.jdk17
+    pkgs.android-studio
+    pkgs.android-tools
     pkgs.gradle
+    pkgs.jdk17
   ];
 }
