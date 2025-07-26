@@ -15,7 +15,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "export JAVA_HOME=/nix/store/$(ls /nix/store | grep openjdk17 | head -1)"
+args = "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
