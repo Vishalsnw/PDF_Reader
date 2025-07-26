@@ -9,14 +9,15 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace 'com.render.app'
+    namespace 'com.reader.app'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.render.app"
+        applicationId "com.reader.app"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -89,6 +90,13 @@ dependencies {
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // Image loading
+    implementation 'io.coil-kt:coil:2.5.0'
 
     // Testing
     testImplementation 'junit:junit:4.13.2'
