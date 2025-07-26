@@ -15,7 +15,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "export JAVA_HOME=$(nix-build --no-out-link '<nixpkgs>' -A jdk17)"
+args = "export JAVA_HOME=/nix/store/$(ls /nix/store | grep openjdk17 | head -1)"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -23,8 +23,16 @@ args = "export PATH=$JAVA_HOME/bin:$PATH"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
+args = "export ANDROID_HOME=/nix/store/$(ls /nix/store | grep android-sdk | head -1)"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
 args = "chmod +x ./gradlew"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./gradlew clean assembleDebug --stacktrace"
+args = "./gradlew clean"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew assembleDebug --stacktrace --info"

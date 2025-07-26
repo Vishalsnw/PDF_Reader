@@ -13,11 +13,11 @@ plugins {
 }
 
 android {
-    namespace 'com.reader.app'
+    namespace 'com.render.app'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.reader.app"
+        applicationId "com.render.app"
         minSdk 24
         targetSdk 34
         versionCode 1

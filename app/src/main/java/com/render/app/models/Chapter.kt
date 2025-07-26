@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.models
+package com.render.app.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
