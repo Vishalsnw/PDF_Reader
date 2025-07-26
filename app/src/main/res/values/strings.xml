@@ -4,7 +4,7 @@
   Created: 2025-06-02
   Author: Vishalsnw
   Last Modified: 2025-06-02 15:32:20 UTC
-  
+
   Copyright (c) 2025 Your App Name
   Licensed under the MIT license.
 -->
@@ -140,4 +140,19 @@
     <string name="settings_backup">Backup</string>
     <string name="settings_about">About</string>
     <string name="settings_help">Help</string>
+
+    <!-- Library sections -->
+    <string name="section_all_books">All Books</string>
+    <string name="section_reading">Reading</string>
+    <string name="section_completed">Completed</string>
+    <string name="section_recent">Recent</string>
+    <string name="section_favorites">Favorites</string>
+    <string name="section_to_read">To Read</string>
+    <string name="section_dropped">Dropped</string>
+
+    <!-- General -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
 </resources>
