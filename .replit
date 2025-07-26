@@ -1,8 +1,10 @@
+modules = ["nix"]
+run = "./gradlew build"
 [nix]
-channel = "stable-23_05"
+channel = "stable-25_05"
 
 [deployment]
-run = ["sh", "-c", "./gradlew run"]
+run = ["sh", "-c", "./gradlew build"]
 
 [workflows]
 runButton = "Build and Run JavaFX App"
