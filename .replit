@@ -4,3 +4,23 @@ channel = "stable-25_05"
 
 [deployment]
 run = ["sh", "-c", "npm run dev"]
+
+[workflows]
+runButton = "Build Android App"
+
+[[workflows.workflow]]
+name = "Build Android App"
+author = 45581451
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export JAVA_HOME=/nix/store/$(ls /nix/store | grep openjdk17 | head -1)"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export PATH=$JAVA_HOME/bin:$PATH"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew assembleDebug"
