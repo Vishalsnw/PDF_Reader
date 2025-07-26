@@ -4,3 +4,15 @@ channel = "stable-25_05"
 
 [deployment]
 run = ["sh", "-c", "npm run dev"]
+
+[workflows]
+runButton = "Build Android App"
+
+[[workflows.workflow]]
+name = "Build Android App"
+author = 45580165
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./gradlew build"
