@@ -15,7 +15,7 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "export JAVA_HOME=$(nix-build --no-out-link '<nixpkgs>' -A jdk17)/lib/openjdk"
+args = "export JAVA_HOME=$(nix-build --no-out-link '<nixpkgs>' -A jdk17)"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
@@ -27,4 +27,4 @@ args = "chmod +x ./gradlew"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "./gradlew clean assembleDebug"
+args = "./gradlew clean assembleDebug --stacktrace"

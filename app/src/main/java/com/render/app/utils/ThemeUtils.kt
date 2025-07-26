@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.utils
+package com.render.app.utils
 
 import android.content.Context
 import android.content.res.Configuration
@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.reader.app.models.Theme
+import com.render.app.models.Theme
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt

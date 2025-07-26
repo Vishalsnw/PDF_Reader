@@ -8,7 +8,7 @@
  * Licensed under the MIT license.
  */
 
-package com.reader.app.utils
+package com.render.app.utils
 
 import android.content.Context
 import android.os.Build
